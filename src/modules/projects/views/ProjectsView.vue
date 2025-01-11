@@ -19,6 +19,7 @@
         </tr>
       </tbody>
     </table>
+    <InputModal/>
     <fab-button @click="() => console.log('add')">
       <AddCircle/> 
     </fab-button>
@@ -26,5 +27,6 @@
 </template>
 <script lang="ts" setup>
   import FabButton from '@/modules/common/components/FabButton.vue'
+  import InputModal from '@/modules/common/components/InputModal.vue';
   import AddCircle from '@/modules/common/icons/AddCircle.vue'
 </script>
