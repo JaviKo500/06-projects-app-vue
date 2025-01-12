@@ -20,11 +20,11 @@ export const useProjectsStore = defineStore('projects', () => {
   }
   return {
     // properties
-    // projects,
+    projects,
 
     // getters
     projectList: computed( () => [...projects.value] ),
-    
+    noProjects: computed( ()=> !projects.value.length ),
     // actions
     addProject
   };
