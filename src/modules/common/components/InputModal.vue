@@ -21,7 +21,7 @@
   <div v-if="modalOpen" class="modal-backdrop fixed top-0 left-0 z-10 bg-black opacity-50 w-screen h-screen"></div>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
   interface Props {
     modalOpen: boolean;
@@ -30,7 +30,7 @@ import { ref } from 'vue';
     subtitle?: string;
   }
 
-  withDefaults(defineProps<Props>(), {
+  const props = withDefaults(defineProps<Props>(), {
     modalOpen: false,
     placeholder: 'Enter value',
     title: 'Hello',
@@ -42,6 +42,11 @@ import { ref } from 'vue';
     value: [text:string]
   }>();
 
+  watch(props, ({ modalOpen }) => {
+    if (modalOpen) {
+      inputRef.value?.focus();
+    }
+  });
   const inputValue = ref('');
 
   const inputRef = ref<HTMLInputElement | null>(null);
