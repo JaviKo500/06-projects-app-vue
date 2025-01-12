@@ -6,16 +6,18 @@
         <tr>
           <th></th>
           <th>Project</th>
-          <th>Task</th>
+          <th>Tasks</th>
           <th>Progress</th>
         </tr>
       </thead>
       <tbody>
-        <tr class="hover" v-for="project in projectsStore.projects" :key="project.id">
-          <th>{{ project.id }}</th>
+        <tr class="hover" v-for="(project, index) in projectsStore.projectList" :key="project.id">
+          <th>{{ index+1 }}</th>
           <td>{{ project.name }}</td>
-          <td>Desktop Support Technician</td>
-          <td>Purple</td>
+          <td>{{ project.tasks.length }}</td>
+          <td>
+            <ProgressBar :value="project.tasks.filter(task => task.completedAt).length" :max="project.tasks.length"/>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -25,7 +27,7 @@
       title="Add new project"
       :modal-open="modalOpen" 
       @close="modalOpen = false" 
-      @value="onNewValue"/>
+      @value="projectsStore.addProject"/>
     <custom-modal 
       :modal-open="customModalOpen" >
       <template #header>
@@ -59,13 +61,10 @@
   import CustomModal from '@/modules/common/components/CustomModal.vue';
   import AddProject from '@/modules/common/icons/AddProject.vue';
 import { useProjectsStore } from '../store/projects.store';
+import ProgressBar from '@/modules/common/components/ProgressBar.vue';
 
   const modalOpen = ref(false);
   const customModalOpen = ref(false);
 
   const projectsStore = useProjectsStore();
-  const onNewValue = (projectName: string) => {
-    console.log('<--------------- JK ProjectsView --------------->');
-    console.log(projectName);
-  }
 </script>
