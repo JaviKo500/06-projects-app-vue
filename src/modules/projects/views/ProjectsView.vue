@@ -11,9 +11,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="hover">
-          <th>2</th>
-          <td>Hart Hagerty</td>
+        <tr class="hover" v-for="project in projectsStore.projects" :key="project.id">
+          <th>{{ project.id }}</th>
+          <td>{{ project.name }}</td>
           <td>Desktop Support Technician</td>
           <td>Purple</td>
         </tr>
@@ -34,7 +34,7 @@
       <template #body>
         <p>Consectetur laboris officia tempor incididunt fugiat irure ea do amet ad consectetur pariatur dolore. Et qui nisi cillum anim enim ipsum eiusmod cupidatat do id. Anim sunt aute labore deserunt nisi velit officia. Esse commodo velit aliqua sint. Amet excepteur adipisicing irure fugiat aute dolor pariatur incididunt dolore eiusmod. Ipsum non non labore esse.</p>
       </template>
-      <template #footer>
+      <template #footer >
         <div class="flex justify-end">
           <button class="btn mr-4" @click="customModalOpen = false">Close</button>
           <button class="btn btn-primary">Save</button>
@@ -58,10 +58,12 @@
   import AddCircle from '@/modules/common/icons/AddCircle.vue';
   import CustomModal from '@/modules/common/components/CustomModal.vue';
   import AddProject from '@/modules/common/icons/AddProject.vue';
+import { useProjectsStore } from '../store/projects.store';
 
   const modalOpen = ref(false);
   const customModalOpen = ref(false);
 
+  const projectsStore = useProjectsStore();
   const onNewValue = (projectName: string) => {
     console.log('<--------------- JK ProjectsView --------------->');
     console.log(projectName);
