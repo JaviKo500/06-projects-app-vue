@@ -44,6 +44,20 @@ export const useProjectsStore = defineStore('projects', () => {
     // getters
     projectList: computed( () => [...projects.value] ),
     noProjects: computed( ()=> !projects.value.length ),
+    projectWithCompletions: computed( () => {
+      return projects.value.map( project => {
+        const total = project.tasks.length;
+        const completed = project.tasks.filter( task => task.completedAt ).length;
+        const percentage = total === 0 ? 0 : Math.round((completed / total) * 100);
+        return {
+          id: project.id,
+          name: project.name,
+          taskCount: project.tasks.length,
+          completion: project.tasks.filter( task => task.completedAt ).length,
+          percentage,
+        }
+      });
+    }),
     // actions
     addProject,
     addTaskToProject,

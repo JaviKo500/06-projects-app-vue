@@ -25,7 +25,7 @@
                   type="checkbox" name="" id=""/>
               </th>
               <td>{{ task.name }}</td>
-              <td>{{ task.completedAt?.toDateString() }}</td>
+              <td>{{ task.completedAt}}</td>
             </tr>
             <tr class="hover">
               <th></th>

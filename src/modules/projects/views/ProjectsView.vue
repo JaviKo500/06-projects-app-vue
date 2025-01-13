@@ -11,12 +11,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="hover" v-for="(project, index) in projectsStore.projectList" :key="project.id">
+        <tr class="hover" v-for="(project, index) in projectsStore.projectWithCompletions" :key="project.id">
           <th>{{ index+1 }}</th>
           <td>{{ project.name }}</td>
-          <td>{{ project.tasks.length }}</td>
+          <td>{{ project.taskCount }}</td>
           <td>
-            <ProgressBar :value="project.tasks.filter(task => task.completedAt).length" :max="project.tasks.length"/>
+            <ProgressBar :value="project.completion" :max="project.taskCount" :progress="project.percentage"/>
           </td>
         </tr>
       </tbody>
