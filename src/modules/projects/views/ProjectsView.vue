@@ -60,8 +60,8 @@
   import AddCircle from '@/modules/common/icons/AddCircle.vue';
   import CustomModal from '@/modules/common/components/CustomModal.vue';
   import AddProject from '@/modules/common/icons/AddProject.vue';
-import { useProjectsStore } from '../store/projects.store';
-import ProgressBar from '@/modules/common/components/ProgressBar.vue';
+  import { useProjectsStore } from '../store/projects.store';
+  import ProgressBar from '@/modules/common/components/ProgressBar.vue';
 
   const modalOpen = ref(false);
   const customModalOpen = ref(false);
