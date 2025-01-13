@@ -10,8 +10,17 @@ export const useProjectsStore = defineStore('projects', () => {
     useLocalStorage<Project[]>( 'projects', [] )
   );
 
+  const addTaskToProject = (id: string, name: string) => {
+    if ( !name.trim() ) return;
+    const project = projects.value.find( project => project.id === id );
+    if ( !project ) return;
+    project.tasks.push({
+      id: UuidAdapter.generate(),
+      name,
+    });
+  }
   const addProject = (name: string) => {
-    if (!name) return;
+    if ( !name.trim()) return;
     projects.value.push({
       id: UuidAdapter.generate(),
       name,
@@ -26,6 +35,8 @@ export const useProjectsStore = defineStore('projects', () => {
     projectList: computed( () => [...projects.value] ),
     noProjects: computed( ()=> !projects.value.length ),
     // actions
-    addProject
+    addProject,
+    addTaskToProject,
+
   };
 });

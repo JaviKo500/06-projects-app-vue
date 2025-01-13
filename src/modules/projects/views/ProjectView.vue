@@ -16,17 +16,19 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="hover">
-              <th>2</th>
-              <td>Hart Hagerty</td>
-              <td>Desktop Support Technician</td>
+            <tr class="hover" v-for="(task, index) in project?.tasks" :key="task.id">
+              <th>{{ index + 1 }}</th>
+              <td>{{ task.name }}</td>
+              <td>{{ task.completedAt }}</td>
             </tr>
             <tr class="hover">
               <th></th>
               <td>
                 <input 
                   class="input input-primary w-full opacity-60 transition-all hover:opacity-100 focus:opacity-100"
-                  type="text" name="" id="" placeholder="Enter new task">
+                  type="text" name="" id="" placeholder="Enter new task"
+                  v-model="name"
+                  @keyup.enter="addTask">
               </td>
               <td></td>
             </tr>
@@ -34,7 +36,6 @@
         </table>
       </div>
     </section>
-
   </div>
 </template>
 
@@ -61,6 +62,14 @@
   const projectStore = useProjectsStore(); 
 
   const project = ref<Project | null>(null);
+
+  const name = ref('');
+
+  const addTask = () => {
+    if ( !project.value || !name.value?.trim() ) return;
+    projectStore.addTaskToProject(props.id, name.value);
+    name.value = '';
+  }
 
   watch( 
     () => props.id, 
