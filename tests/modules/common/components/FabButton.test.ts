@@ -47,8 +47,6 @@ describe('FabButton.test', () => {
     });
 
     const slotContent = wrapper.find('button span');
-    console.log('<--------------- JK FabButton.test --------------->');
-    console.log(slotContent);
 
     expect(slotContent.exists()).toBe(true);
     expect(slotContent.text()).toBe('Hello World');
