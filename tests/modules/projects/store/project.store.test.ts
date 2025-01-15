@@ -98,4 +98,37 @@ describe('Project.store.test', () => {
       completedAt: expect.any(Date),
     });
   });
+
+  test( 'should return the project with completions', () => {
+    const store = useProjectsStore();
+    store.$patch( ( state ) => {
+      state.projects = fakeProjects;
+    });
+
+    expect( store.projectWithCompletions ).toEqual(
+      [
+        {
+          id: '1',
+          name: 'project 1',
+          taskCount: 4,
+          completion: 1,
+          percentage: 25
+        },
+        {
+          id: '2',
+          name: 'project 2',
+          taskCount: 2,
+          completion: 1,
+          percentage: 50
+        },
+        {
+          id: '3',
+          name: 'project 3',
+          taskCount: 2,
+          completion: 1,
+          percentage: 50
+        }
+      ]
+    );
+  });
 });
